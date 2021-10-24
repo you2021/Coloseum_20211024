@@ -7,6 +7,11 @@ import java.io.IOException
 
 class ServerUtil {
 
+    // 돌아온 응답을 화면에 전달 : 나(ServerUtil)에게 발생한 말을 => 화면단에서 대신 처리해달라고 하자 (interface 활영)
+    interface JsonResponseHandler{
+        fun onResponse(jsonObj: JSONObject)
+    }
+
     // static 에 대응되는 기능활용
 
     companion object{
@@ -15,12 +20,13 @@ class ServerUtil {
         val BASE_URL = "http://54.180.52.26"
 
         // 이 { } 안에 적는 코드들은 다른 클래스에서 ServerUtil.변수/기능 활용 가능
+        // handler : 화면단에서 적어주는, 응답을 어떻게 처리할지 대처 발안이 담긴 인터페이스 변수
 
 //        fun test(num:Int) : Int {
 //            return num * 2
 //        }
 
-        fun postRequestLogin( email:String, pw: String ){
+        fun postRequestLogin( email:String, pw: String, handler:JsonResponseHandler? ){
 
         // 1. 어디로 요청하러(인터넷 주소 연결 - URL) 갈것인가?
         val urlString:String = "${BASE_URL}/user"
@@ -61,6 +67,9 @@ class ServerUtil {
 
             val jsonObj = JSONObject(bodyString)
             Log.d("서버응답본문", jsonObj.toString())
+
+            // 화면단에서, 응답에 대한 처리방안을 재시했다면 (handler 가 null 아니라면 - 실제가 있다면)
+            handler?.onResponse(jsonObj)
 
                 // 연습. code 숫자 추출. 로그인 성공 여부 판단 -> 로그로 출력
                 // "code" 숫자 -> 제일 큰 중괄호(jsonObj)에 바로 달려 있음. -> jsonObj에게 찾아달라고 하자
