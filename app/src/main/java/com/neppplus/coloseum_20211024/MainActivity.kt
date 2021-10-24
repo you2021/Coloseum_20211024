@@ -25,7 +25,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("입력이메일", inputEmail)
             Log.d("입력비번", inputPw)
 
-            ServerUtil.test(5)
+//            ServerUtil.test(5)
+
+        //서버의 로그인 기능에 전달
+            ServerUtil.postRequestLogin(inputEmail,inputPw)
 
         }
     }
