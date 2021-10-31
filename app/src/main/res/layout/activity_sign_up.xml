@@ -26,7 +26,9 @@
                 android:layout_weight="1"
                 android:inputType="textEmailAddress"
                 android:hint="이메일 형식으로 입력"/>
+
             <Button
+                android:id="@+id/checkEmailBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="중복 확인"/>
@@ -34,6 +36,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/emailCheckResultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이메일 중복 검사를 해주세요"/>
