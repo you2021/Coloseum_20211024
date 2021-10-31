@@ -67,6 +67,9 @@ class SignUpActivity : BaseActivity() {
             // 도전과제. 구글링 필요 => 입력한 이메일이, 이메일 양식이 맞는지? aaa@nam 등
             // 정규 표현식 활용. -> 이메일 양식 검증 정규표현식
 
+//            val pattern = android.uril.Patter
+
+
             if (!isEmailOk){
                 Toast.makeText(mContext, "이메일 확인을 다시 해주세요.", Toast.LENGTH_SHORT).show()
 
