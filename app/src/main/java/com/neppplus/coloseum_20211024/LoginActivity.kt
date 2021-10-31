@@ -66,6 +66,7 @@ class LoginActivity : BaseActivity() {
                         val token = dataObj.getString("token")
 
                         // SharedPreferences 활용하여 저장해 두자 => 필요할때 꺼내쓰도록
+                        ContextUtil.setToken(mContext,token)
 
                         runOnUiThread{
                             Toast.makeText(mContext, "${nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
