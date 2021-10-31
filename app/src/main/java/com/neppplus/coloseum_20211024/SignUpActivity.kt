@@ -16,6 +16,7 @@ class SignUpActivity : BaseActivity() {
 
     // 이메일 중복검사 통과 여부 저장 변수
     var isEmailOk = false  // 기본값: 통과 X, 그래서 false => 자료형 자동으로 Boolean으로 설정.
+    var isNickname = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,33 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.nicknameEdt.addTextChangedListener {
+            val inputContent = it.toString()
+            Log.d("변경된내용", inputContent)
+
+            binding.nicknameCheckResultText.text="닉네임 중복 검사를 해주세요."
+            isNickname = false
+        }
+
+        binding.checkNicknameBtn.setOnClickListener {
+            val  inputNickname = binding.nicknameEdt.text.toString()
+            ServerUtil.getRequestDuplCheck("NICK_NAME",inputNickname, object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+                    val code = jsonObj.getInt("code")
+                    runOnUiThread{
+                        if (code == 200){
+                            binding.nicknameCheckResultText.text = "사용해도 좋습니다."
+                            isNickname = true
+                        }else{
+                            binding.nicknameCheckResultText.text = "다른 닉네임을 입력하고, 다시 검사해주세요"
+                            isNickname = false
+                        }
+                    }
+                }
+
+            })
+        }
 
         binding.emailEdt.addTextChangedListener {
             val inputContent = it.toString()
@@ -69,6 +97,10 @@ class SignUpActivity : BaseActivity() {
 
 //            val pattern = android.uril.Patter
 
+            if (!isNickname){
+                Toast.makeText(mContext, "닉네임 확인을 다시 해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (!isEmailOk){
                 Toast.makeText(mContext, "이메일 확인을 다시 해주세요.", Toast.LENGTH_SHORT).show()
