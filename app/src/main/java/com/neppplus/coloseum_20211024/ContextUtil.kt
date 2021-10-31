@@ -8,9 +8,23 @@ class ContextUtil {
        private val prefName = "ColosseumPref"
 
         private val TOKEN ="TOKEN"
+
+        // 자동로그인 체크 여부 저장
+        private val AUTO_LOGIN = "AUTO_LOGIN"
+
+        // 자동 로그인 - setter/getter 작성
+        fun setAutoLogin(context: Context, isAuto:Boolean){
+            val pref = context.getSharedPreferences(prefName,Context.MODE_PRIVATE)
+            pref.edit().putBoolean(AUTO_LOGIN, isAuto).apply()
+        }
+
+        fun getAutoLogin(context: Context):Boolean{
+            val pref = context.getSharedPreferences(prefName,Context.MODE_PRIVATE)
+            return pref.getBoolean(AUTO_LOGIN, false)
+        }
+
         //setter - 저장 기능
         fun setToken(context:Context, token:String){
-
             // 메모장을 불러내자.
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
             // 불러낸 메모장에 token 값 기록
