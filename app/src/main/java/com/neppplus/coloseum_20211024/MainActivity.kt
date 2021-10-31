@@ -37,13 +37,17 @@ class MainActivity : AppCompatActivity() {
                     val code = jsonObj.getInt("code")
 
                     // 로그인 성공시 -> 성공 토스트
-                    // 실패시 -> 왜 실패했는지 서버ㅏ 알려주는대로 토스트
+                    // 실패시 -> 왜 실패했는지 서버 알려주는대로 토스트
                      if(code == 200){
                          runOnUiThread{
                              Toast.makeText(this@MainActivity,"로그인 성공", Toast.LENGTH_SHORT).show()
                          }
                      }else{
-
+                         // 서버가 알려주는 로그인실패 사유 파싱 ->토스트
+                         val message = jsonObj.getString("message")
+                        runOnUiThread{
+                            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                        }
                      }
 
                 }
