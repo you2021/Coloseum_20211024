@@ -9,14 +9,21 @@ import com.neppplus.coloseum_20211024.databinding.ActivityMainBinding
 import com.neppplus.coloseum_20211024.utils.ServerUtil
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var  binding : ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        setupEvents()
+        setValues()
+
+    }
+
+    override fun setupEvents() {
         binding.loginBtn.setOnClickListener {
 
             // 입력한 이메일/비번을 데이터바이딩으로 가져오기
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
 //            ServerUtil.test(5)
 
-        //서버의 로그인 기능에 전달
+            //서버의 로그인 기능에 전달
             ServerUtil.postRequestLogin(inputEmail,inputPw, object :ServerUtil.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
 
@@ -38,21 +45,23 @@ class MainActivity : AppCompatActivity() {
 
                     // 로그인 성공시 -> 성공 토스트
                     // 실패시 -> 왜 실패했는지 서버 알려주는대로 토스트
-                     if(code == 200){
-                         runOnUiThread{
-                             Toast.makeText(this@MainActivity,"로그인 성공", Toast.LENGTH_SHORT).show()
-                         }
-                     }else{
-                         // 서버가 알려주는 로그인실패 사유 파싱 ->토스트
-                         val message = jsonObj.getString("message")
+                    if(code == 200){
+                        runOnUiThread{
+                            Toast.makeText(this@MainActivity,"로그인 성공", Toast.LENGTH_SHORT).show()
+                        }
+                    }else{
+                        // 서버가 알려주는 로그인실패 사유 파싱 ->토스트
+                        val message = jsonObj.getString("message")
                         runOnUiThread{
                             Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                         }
-                     }
-
+                    }
                 }
             })
-
         }
+
+    }
+
+    override fun setValues() {
     }
 }
