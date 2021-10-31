@@ -62,8 +62,17 @@ class LoginActivity : BaseActivity() {
                         val userObj = dataObj.getJSONObject("user")
                         val nickname = userObj.getString("nick_name")
 
+                        // 내 정보를 인증하는 데이터 : 토큰 추출
+                        val token = dataObj.getString("token")
+
+                        // SharedPreferences 활용하여 저장해 두자 => 필요할때 꺼내쓰도록
+
                         runOnUiThread{
                             Toast.makeText(mContext, "${nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
+
+                            val myIntent = Intent(mContext,MainActivity::class.java)
+                            startActivity(myIntent)
+                            finish()
                         }
                     }else{
                         // 서버가 알려주는 로그인실패 사유 파싱 ->토스트
