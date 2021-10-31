@@ -63,6 +63,10 @@ class SignUpActivity : BaseActivity() {
             val inputNickname = binding.nicknameEdt.text.toString()
 
             // 입력값들이 괜찮은지 먼저 검사 => 전부통과해야 회원가입 실행
+
+            // 도전과제. 구글링 필요 => 입력한 이메일이, 이메일 양식이 맞는지? aaa@nam 등
+            // 정규 표현식 활용. -> 이메일 약식 검증 정규표현식
+
             if (!isEmailOk){
                 Toast.makeText(mContext, "이메일 확인을 다시 해주세요.", Toast.LENGTH_SHORT).show()
 
