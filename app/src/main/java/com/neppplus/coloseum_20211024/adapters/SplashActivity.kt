@@ -15,14 +15,15 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_splash)
         setupEvents()
+        setValues()
 
-    }
-
-    override fun setValues() {
-        TODO("Not yet implemented")
     }
 
     override fun setupEvents() {
-        TODO("Not yet implemented")
     }
+
+    override fun setValues() {
+    }
+
+
 }
