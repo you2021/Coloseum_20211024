@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.neppplus.coloseum_20211024.adapters.ReplyAdapter
 import com.neppplus.coloseum_20211024.databinding.ActivityViewTopicDetailMainBinding
 import com.neppplus.coloseum_20211024.datas.ReplyData
 import com.neppplus.coloseum_20211024.datas.TopicData
@@ -18,6 +19,8 @@ class ViewTopicDetailMainActivity : BaseActivity() {
     lateinit var mTopicData : TopicData
 
     val mReplyList = ArrayList<ReplyData>()
+
+    lateinit var mReplyAdapter: ReplyAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,11 @@ class ViewTopicDetailMainActivity : BaseActivity() {
         binding.topicTitleTxt.text = mTopicData.title
 
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.topicImg)
+
+        getTopicDetailFromServer()
+
+        mReplyAdapter = ReplyAdapter(mContext, R.layout.reply_list_item, mReplyList)
+        binding.replyListView.adapter = mReplyAdapter
 
     }
 
@@ -62,6 +70,7 @@ class ViewTopicDetailMainActivity : BaseActivity() {
                     mReplyList.add(replyData)
                 }
                 // 리스트뷰의 목록에 변경 => 어댑터 새로고침
+                mReplyAdapter.notifyDataSetChanged()
             }
 
         })
