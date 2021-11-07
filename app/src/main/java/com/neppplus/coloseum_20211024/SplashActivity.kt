@@ -1,12 +1,10 @@
-package com.neppplus.coloseum_20211024.adapters
+package com.neppplus.coloseum_20211024
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.databinding.DataBindingUtil
-import com.neppplus.coloseum_20211024.*
 import com.neppplus.coloseum_20211024.databinding.ActivitySplashBinding
 
 class SplashActivity : BaseActivity() {

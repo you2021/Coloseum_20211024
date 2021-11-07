@@ -16,7 +16,7 @@
             android:name=".ViewTopicDetailMainActivity"
             android:exported="false" />
         <activity
-            android:name=".adapters.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
