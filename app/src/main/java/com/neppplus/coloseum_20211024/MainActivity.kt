@@ -87,6 +87,11 @@ class MainActivity : BaseActivity() {
                 }
 
                 // for문이 끝나면, mTopicList에 모든 토론 주제가 추가된 상태다.
+                // 어댑터가 변경사항을 감지하도록 처리하자 => 내용 반영 : UI 변경(백그라운드)
+
+                runOnUiThread{  // 백그라운드이기에 이 안에 하는것이 안전하다.
+                    mTopicAdapter.notifyDataSetChanged()
+                }
 
             }
 
