@@ -8,6 +8,8 @@ class TopicData(
     var title:String,
     var imageURL:String): Serializable {
 
+    // 의견(댓글) 갯수 변수
+    var replyCount = 0
     // 선택 지형 목록도 멤버변수로 추가
 
 
@@ -30,6 +32,8 @@ class TopicData(
             topicData.id = jsonObject.getInt("id")
             topicData.title = jsonObject.getString("title")
             topicData.imageURL = jsonObject.getString("img_url")
+
+            topicData.replyCount = jsonObject.getInt("reply_count")
 
             return topicData
 
