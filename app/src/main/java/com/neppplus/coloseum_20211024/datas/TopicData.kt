@@ -15,8 +15,6 @@ class TopicData(
     // 선택 지형 "목록"
     val sideList = ArrayList<SideData>()
 
-
-
     // 토픽데이터 만들때는 빈 괄호 TopicData() 형태도 지원하자
     // 다른 형태의 생성자(보조 생성자)도 추가 지원
 
@@ -38,6 +36,17 @@ class TopicData(
             topicData.imageURL = jsonObject.getString("img_url")
 
             topicData.replyCount = jsonObject.getInt("reply_count")
+
+            // jsonObj 내부에 sides JSONArray가 있다. => 파싱 : SideData 목록 추가
+            val sidesArr = jsonObject.getJSONArray("sides")
+
+            for ( i in 0 until  sidesArr.length() ){
+                val sideObj = sidesArr.getJSONObject(i)
+
+                val sideData = SideData.getSideDataFromJSON(sideObj)
+
+                topicData.sideList.add(sideData)
+            }
 
             return topicData
 
