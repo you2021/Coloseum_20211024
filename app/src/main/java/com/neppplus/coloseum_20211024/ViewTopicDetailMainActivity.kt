@@ -69,8 +69,11 @@ class ViewTopicDetailMainActivity : BaseActivity() {
                     // 댓슬목록으로 추가
                     mReplyList.add(replyData)
                 }
-                // 리스트뷰의 목록에 변경 => 어댑터 새로고침
-                mReplyAdapter.notifyDataSetChanged()
+                // 리스트뷰의 목록에 변경 => 어댑터 새로고침 (UI 변경)
+                runOnUiThread {
+                    mReplyAdapter.notifyDataSetChanged()
+
+                }
             }
 
         })
