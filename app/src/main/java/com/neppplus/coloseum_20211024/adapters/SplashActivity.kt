@@ -31,7 +31,7 @@ class SplashActivity : BaseActivity() {
         myHandler.postDelayed( {
          // 자동 로그인을 해도 되는지 검사.
          // 1. 토큰값이 저장된게 있는가?
-         // 2. ( 차후작성)그토큰이 실제로 유혀한가? => 데이터를 받아올 수 있는 토큰?
+         // 2. (차후작성)그토큰이 실제로 유혀한가? => 데이터를 받아올 수 있는 토큰?
 
          val myIntent :Intent
 
