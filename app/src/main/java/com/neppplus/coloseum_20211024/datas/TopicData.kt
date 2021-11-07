@@ -2,6 +2,7 @@ package com.neppplus.coloseum_20211024.datas
 
 import org.json.JSONObject
 import java.io.Serializable
+import java.util.ArrayList
 
 class TopicData(
     var id:Int,
@@ -10,7 +11,10 @@ class TopicData(
 
     // 의견(댓글) 갯수 변수
     var replyCount = 0
-    // 선택 지형 목록도 멤버변수로 추가
+
+    // 선택 지형 "목록"
+    val sideList = ArrayList<SideData>()
+
 
 
     // 토픽데이터 만들때는 빈 괄호 TopicData() 형태도 지원하자
